@@ -1,10 +1,10 @@
-# push_wayback  -  A python tool to check if a URL is U+1F957 fresh in the Wayback Machine, and recapture the URL if it stale.
+# push_wayback  -  A python tool to check if a URL is :seedling:fresh in the Wayback Machine, and recapture the URL if it stale.
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
 Usage: `push_wayback.py [options] [URL]`
 * -h --help                 Show this help message and exit.
-* -d --days                 Manually set definition of U+1F957 fresh (in days) [default: 365].
+* -d --days                 Manually set definition of :seedling:fresh (in days) [default: 365].
 * -v --version              Show version.
 * -a --author               Show author.     #ERROR Note: This does not work
 * -thx --thanks             Show gratitude.  #ERROR Note: This does not work
