@@ -25,6 +25,7 @@ cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done
 
 
 Functional notes:
+
     1. This script will instruct the Internet Archive's Wayback Machine to capture a URL if either:
        A. the URL has not been captured
        B. the URL capture is older than the days sepcified by the user (defaults to 365 days)
