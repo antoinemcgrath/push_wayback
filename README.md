@@ -2,8 +2,7 @@
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
-
- *  `push_wayback.py [options] [URL]`
+Usage: `push_wayback.py [options] [URL]`
 * -h --help                 Show this help message and exit.
 * -d --days                 Manually set days [default: 365].
 * -v --version              Show version.
