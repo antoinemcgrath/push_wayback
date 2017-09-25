@@ -1,17 +1,10 @@
 #!/usr/bin/env python
 """
-Functional notes:
-    1. This script will instruct the Internet Archive's Wayback Machine to capture a URL if either:
-       A. the URL has not been captured
-       B. the URL capture is older than the days sepcified by the user (defaults to 365 days)
 
-    2. This script does follow redirects.
-       The final destination URL will be used to interact with the Wayback Machine
-       *Future versions may support suppresion of this feature.
+# push_wayback  -  
+A python tool to check if a URL in the Wayback Machine is :seedling:fresh, and recapture the URL if it is stale.
 
-    3. If days is set to 0 via argument "-d 0" the URL will be submitted to the wayback.
-       Based on observation the wayback may reject resubmissions if recently recaptured
-       Perhaps the wayback has a limit on recaptures within a defined period
+Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
 
 Usage:
@@ -25,14 +18,38 @@ Options:
   -thx --thanks             Show gratitude.  #ERROR Note: This does not work
 
 
-Run on a single URL:
-python3 push_wayback.py "URL"
 
-Run on a single URL and recapture if older than 7 days:
-python3 -d 7 push_wayback.py "URL"
+Run from bash with any of the following commands
+--------
 
-For a list of URLs:
-cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done
+### Run on a single URL(!):
+ *  `python3 push_wayback.py "URL"`
+
+### Run on a single URL, do not recapture if fresher than: 7 days 
+ *  `python3 -d 7 push_wayback.py "URL"`
+
+### For a list of URLs(!):
+ *  `cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done`
+
+### (!)Default recapture is "Do not recapture if fresher than: 365 days" 
+
+
+
+Functional notes:
+
+    1. This script will instruct the Internet Archive's Wayback Machine to capture a URL if either:
+       A. the URL has not been captured
+       B. the URL capture is stale (definition of fresh is specified by the user, by default fresh is within 365 days)
+
+    2. This script does follow redirects.
+       The final destination URL will be used to interact with the Wayback Machine
+       *Future versions may support suppresion of this feature.
+
+    3. If days is set to 0 via argument "-d 0" the URL will be submitted to the wayback.
+       Based on observation the wayback may reject resubmissions if recently recaptured
+       Perhaps the wayback has a limit on recaptures within a defined period
+
+
 
 """
 
