@@ -1,5 +1,6 @@
-# push_wayback
-Push URLs to the Wayback Machine using the Internet Archive's ia_plugin
+# push_wayback - Push URLs to the Wayback Machine 
+
+using the Internet Archive's ia_plugin
 
 Usage:
 
@@ -19,18 +20,18 @@ Options:
 
 
 
-Run on a single URL:
+Executing
+--------
 
+**Run from bash with any of the following commands**
+
+###Run on a single URL:
 python3 push_wayback.py "URL"
 
-
-Run on a single URL and recapture if older than 7 days:
-
+###Run on a single URL and recapture if older than 7 days:
 python3 -d 7 push_wayback.py "URL"
 
-
-For a list of URLs:
-
+###For a list of URLs:
 cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done
 
 
