@@ -8,15 +8,11 @@ push_wayback.py [options] [URL]
 
 Options:
 
--h --help                 Show this help message and exit.
-
--d --days=<factor>        Manually set days [default: 365].
-
--v --version              Show version.
-
--a --author               Show author.     #ERROR Note: This does not work
-
--thx --thanks             Show gratitude.  #ERROR Note: This does not work
+* -h --help                 Show this help message and exit.
+* -d --days=<factor>        Manually set days [default: 365].
+* -v --version              Show version.
+* -a --author               Show author.     #ERROR Note: This does not work
+* -thx --thanks             Show gratitude.  #ERROR Note: This does not work
 
 
 
@@ -25,13 +21,13 @@ Executing
 
 **Run from bash with any of the following commands**
 
-###Run on a single URL:
+### Run on a single URL:
 python3 push_wayback.py "URL"
 
-###Run on a single URL and recapture if older than 7 days:
+### Run on a single URL and recapture if older than 7 days:
 python3 -d 7 push_wayback.py "URL"
 
-###For a list of URLs:
+### For a list of URLs:
 cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done
 
 
