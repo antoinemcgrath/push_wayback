@@ -1,4 +1,4 @@
-# push_wayback  -  A python tool to check if a URL is :seedling:fresh in the Wayback Machine, and recapture the URL if it stale.
+# push_wayback  -  A python tool to check if a URL in the Wayback Machine is :seedling:fresh, and recapture the URL if it is stale.
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
