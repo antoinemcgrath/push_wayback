@@ -43,14 +43,16 @@ Functional notes:
 
     2. This script does follow redirects.
        The final destination URL will be used to interact with the Wayback Machine
-       *Future versions may support suppresion of this feature.
+       *Future versions may support suppression of this feature.
 
-    3. If days is set to 0 via argument "-d 0" the URL will be submitted to the wayback.
+    3. If days is set to 0 via argument "-d 0" the URL will be submitted to the Wayback.
 
 
-Comments, criqitues, compliments? -> [![alt text][1.2]][1] Twitter: @AGreenDCBike    
+Comments, critiques, compliments? Contact me -> [![alt text][1.2]][1][@AGreenDCBike](https://www.twitter.com/AGreenDCBike)  
 
+Like the [Internet Archive](https://archive.org/donate/) as much as I do? Thank them for hosting the Wayback & much more! -> [![alt text][1.2]][2]   
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
-[1.2]: http://i.imgur.com/wWzX9uB.png (twitter icon without padding)
-[1]: http://www.twitter.com/AGreenDCBike
+[1.2]: https://i.imgur.com/wWzX9uB.png (twitter icon without padding)
+[1]: https://www.twitter.com/AGreenDCBike
+[2]: https://www.twitter.com/internetarchive
