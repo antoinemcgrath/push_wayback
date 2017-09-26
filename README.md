@@ -1,10 +1,10 @@
-# push_wayback  -  A python tool to check if a URL in the Wayback Machine is :seedling:fresh🥗, and recapture the URL if it is stale.
+# wayback_refresh  -  A python tool to check if a URL in the Wayback Machine is fresh :seedling:, and recapture the URL if it is stale.
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
-Usage: `push_wayback.py [options] [URL]`
+Usage: `wayback_refresh.py [options] [URL]`
 * -h --help                 Show this help message and exit.
-* -d --days                 Manually set definition of :seedling:fresh🥗 (in days) [default: 365].
+* -d --days                 Manually set definition of fresh :seedling: (in days) [default: 365].
 * -v --version              Show version.
 * -a --author               Show author.     #ERROR Note: This does not work
 * -thx --thanks             Show gratitude.  #ERROR Note: This does not work
@@ -15,15 +15,15 @@ Run from bash with any of the following commands
 --------
 
 ### Run on a single URL(!):
- *  `python3 push_wayback.py "URL"`
+ *  `python3 wayback_refresh.py "URL"`
 
 ### Run on a single URL, do not recapture if fresher than: 7 days 
- *  `python3 -d 7 push_wayback.py "URL"`
+ *  `python3 -d 7 wayback_refresh.py "URL"`
 
 ### For a list of URLs(!):
- *  `cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done`
+ *  `cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done`
 
-### (!) Default recapture is "Do not recapture if fresher🥗 than: 365 days" 
+### (!) Default recapture is "Do not recapture if fresher than: 365 days" 
 
 
 
