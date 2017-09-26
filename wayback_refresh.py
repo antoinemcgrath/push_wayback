@@ -250,7 +250,7 @@ if __name__ == '__main__':
 
 
 """
-One way to create a list of URLs is to scrap links from urls that are already in the Wayback Machine.
+One way to create a list of URLs is to scrape links from urls that are already in the Wayback Machine.
 To capture URLS & relative URLs from a specified domain: 
  -Utilize https://github.com/hartator/wayback-machine-downloader 
  -And execute the following in bash:
