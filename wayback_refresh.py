@@ -79,7 +79,7 @@ __thanks__ = 'Thanks you to Johan van der Knijff!!! for: ia_plugin, and JJJake f
 
 
 
-#### The following script will recapture a url if the most recent wayback capture is older than the specified days
+#### The following script will recapture a url if it is stale (the wayback capture is older than the user specified days)
 #### Usage: wayback_refresh.py <url> <days>
 
 def wayback_refresh(url):
@@ -89,8 +89,8 @@ def wayback_refresh(url):
 
     # Skip urls treated oddly by the wayback.api
     if url.find("/wp-json/oembed/1.0/embed") > 1:
-        print("Page is wp-json formatting instructions, which is treated by the wayback/api differently: http://archive.org/help/wayback_api.php")
-        sys.exit()
+        print(chr(9940), "Page is wp-json formatting instructions, which are rejected by the wayback/api: http://archive.org/help/wayback_api.php")
+        sys.exit()  # Stale ending: No fresh capture exists, and no refresh was possible
     else:
         # Push URL to refresh wayback
         urlSAVE = "https://web.archive.org/save/"
@@ -98,12 +98,16 @@ def wayback_refresh(url):
 
         if req.status_code == 404:
             req.close()
-            print("Page request is 404, page does not currently exist and cannot be archived")
-            sys.exit()
+            print(chr(9940), "ERROR: Page request is 404, page does not currently exist and cannot be archived")
+            sys.exit()  # Stale ending: No fresh capture exists, and no refresh was possible
         elif req.status_code == 400:
+            req.close()  # Stale ending: No fresh capture exists, and no refresh was possible
+            print(chr(9940), "ERROR: Page request is 400, bad request, Wayback refresh did not complete")
+            sys.exit()  # Stale ending: No fresh capture exists, and no refresh was possible
+        elif req.status_code == 502:
             req.close()
-            print("Page request is 400, bad request")
-            sys.exit()
+            print(chr(9940), "ERROR: Page request is 502, bad gateway, Wayback refresh did not complete")
+            sys.exit()  # Stale ending: No fresh capture exists, and no refresh was possible
         pass
         #if req.status_code == 200:
         #    print("Page request is 200, good request")
@@ -125,11 +129,16 @@ def follow_url_redirects(url):
     url = "http://" + url
 
     # Get the desination url
-    r = requests.get(url, allow_redirects=True)
-    final_url = r.url
-    r.close()
+    try:
+        r = requests.get(url, allow_redirects=True)
+        final_url = r.url
+        r.close()
+        print(submitted_url, " -> ", final_url)
 
-    print(submitted_url, " -> ", final_url)
+    except requests.exceptions.RequestException as e:  # This is the correct syntax
+        print(chr(9889), "ALERT: URL does not currently result in an online site. "
+              "Checking Wayback to see if URL previously hosted content.")
+        final_url = url
     return(final_url)
 
 
@@ -151,6 +160,7 @@ def fetch_wayback_captured_date(url):
         # No snapshots found, no capture is available in the Wayback
         urlWayback = ""
         timestamp = ""
+
     else:
         # Snapshot(s) available
         # For now API only returns 1 snaphot, which is the most recent one.
@@ -162,7 +172,7 @@ def fetch_wayback_captured_date(url):
 
 
 
-def is_capture_recent_enough(days, timestamp):
+def is_capture_fresh_enough(days, timestamp):
     datetimeFormat = "%Y%m%d%H%M%S"
     current = datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S")
     timedelta = datetime.datetime.strptime(current, datetimeFormat) - datetime.datetime.strptime(str(timestamp), datetimeFormat)
@@ -170,53 +180,67 @@ def is_capture_recent_enough(days, timestamp):
     days = datetime.timedelta(days)
 
     if days < timedelta:
-        print("Wayback capture is stale (more than", str(days)[:6], "old). Requesting Wayback refresh", chr(127793))
-        recent_enough = False
+        fresh_enough = False
     else:
         # return(available, urlWayback, status, timestamp)
-        #print("Most recent capture is sufficient: ", urlWayback)
-        #print("Recent enough")
-        recent_enough = True
+        #print("Most recent capture is fresh: ", urlWayback)
+        fresh_enough = True
 
-    return(recent_enough)
+    return(fresh_enough)
 
 def executewill(arguments):
-
-    url = (arguments['URL'])   # Set arg as value
-    days = (int(arguments['--days']))  # Set arg as value
+    # Set arguement values
+    url = (arguments['URL'])
+    days = (int(arguments['--days']))
 
     url = follow_url_redirects(url)   # Follow (&reset) URL to/as final destination
 
     returns = fetch_wayback_captured_date(url)   # Fetch URLs most recent capture date
     timestamp = returns[0]
+    urlWayback = returns[1]
 
-    if len(timestamp) == 0:   # URL not captured in wayback
-        wayback_refresh(url)   # Capture URL
-        returns = fetch_wayback_captured_date(url)   # Fetch URLs most recent capture date
-        timestamp = returns[0]
-        if len(timestamp) == 0:
-            print("URL appears valid, but Wayback is unable to capture")
-            sys.exit()
-    else:
-        pass
+    if len(timestamp) != 0:   # Timestamp exists URL captured in wayback
+        # Check if recent capture date is fresh enough for user specified date
+        fresh_enough = is_capture_fresh_enough(days, timestamp)
 
-    timestamp = returns[0]
-
-    # Check if recent capture date is recent enough for user specified date (365 days if not specified)
-    recent_enough = is_capture_recent_enough(days, timestamp)
-
-    if recent_enough is True:
-        urlWayback = returns[1]
-
-    if recent_enough is False:
-
-        #print("older timestamp: ", timestamp)
+    else: # No timestamp, URL is not captured in wayback
+        print("Wayback has no record of this URL. Requesting Wayback capture", chr(127793))
         wayback_refresh(url)
-        urlWayback = fetch_wayback_captured_date(url)[1]
-        #print("new capture: ", urlWayback)
+        returns_2 = fetch_wayback_captured_date(url)
+        timestamp = returns_2[0]
+        urlWayback = returns_2[1]
 
-    print(urlWayback)
+        if len(timestamp) == 0: # Still no timestamp, despite a refresh attempt
+            print(chr(9940), "ALERT: No wayback record exists and no Wayback refresh was possible")
+            sys.exit()  # Stale ending: No capture exists, and no refresh was possible
 
+        else: # New timestamp, refresh attempt worked
+            print("Wayback refresh complete. A first capture of the URL", chr(127793))
+            print(urlWayback)
+            sys.exit()  # Fresh ending with a first time capture of the URL
+
+
+    if fresh_enough is False: # A capture existed but was not fresh
+        # Refresh the Wayback's capture
+        print("Wayback capture is stale (more than", str(days)[:6], "old). Requesting Wayback refresh", chr(127793))
+        wayback_refresh(url)
+        # Fetch new capture date if available
+        returns_3 = fetch_wayback_captured_date(url)
+        timestamp = returns_3[0]
+        urlWayback = returns_3[1]
+
+        if len(timestamp) == 0:
+            print(chr(9940), "ALERT: Most recent capture remains stale, a Wayback refresh did not complete:")
+            print("STALE:", urlWayback)
+            sys.exit()  # Stale ending: Capture exists but a refresh was not possible
+
+        else:  # Fresh enough is True
+            print(urlWayback)
+            sys.exit()  # Fresh ending: With a fresh capture
+
+    else:  # Fresh enough is True
+        print(urlWayback)
+        sys.exit()  # Fresh ending: No new capture was needed
 
 
 def main():
