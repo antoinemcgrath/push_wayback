@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 
--  A python tool to refresh🌱 stale URLs in the Wayback Machine
+-  A python tool to refresh stale URLs in the Wayback Machine
 
 Specify a URL & how fresh (# of days) you want the Wayback capture to be. 
 This script will use the Internet Archive's ia_plugin to update the capture if it is stale. 
@@ -11,7 +11,7 @@ Usage:
 wayback_refresh.py [options] [URL]
 
 Options:
-  -d --days=<factor>        Set days still fresh🌱 [default: 365].
+  -d --days=<factor>        Set days still fresh [default: 365].
   -h --help                 Show this help message and exit.
   -v --version              Show version.  
   -s --suppress             Suppress all responses. #ERROR Note: This does not work
