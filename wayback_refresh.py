@@ -3,14 +3,14 @@
 
 # wayback_refresh.py  -  A python tool to check if a URL in the Wayback Machine is fresh :seedling: 🌱 if the most recent capture is stale the Wayback will refresh with a new capture of the URL.
 
-# push_wayback  -  
+# wayback_refresh  -  
 A python tool to check if a URL in the Wayback Machine is fresh :seedling: 🌱, and recapture the URL if it is stale.
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
 
 Usage:
-push_wayback.py [options] [URL]
+wayback_refresh.py [options] [URL]
 
 Options:
   -h --help                 Show this help message and exit.
@@ -29,13 +29,13 @@ Run from bash with any of the following commands
 --------
 
 ### Run on a single URL(!):
- *  `python3 push_wayback.py "URL"`
+ *  `python3 wayback_refresh.py "URL"`
 
 ### Run on a single URL, do not recapture if fresher than: 7 days 
- *  `python3 -d 7 push_wayback.py "URL"`
+ *  `python3 -d 7 wayback_refresh.py "URL"`
 
 ### For a list of URLs(!):
- *  `cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done`
+ *  `cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done`
 
 ### (!)Default recapture is "Do not recapture if fresher than: 365 days" 
 
@@ -69,10 +69,10 @@ from docopt import docopt
 __version__ = '0.0.1'
 
 #ERROR Note: These bellow do not work
-__title__ = 'push/repush_wayback_plugin'
+__title__ = 'wayback_refresh_plugin'
 __url__ = 'https://github.com/'
 __author__ = 'Antoine McGrath'
-__all__ = ['push_wayback']
+__all__ = ['wayback_refresh']
 __email__ = 'Test@test.com'
 __thanks__ = 'Thanks you to Johan van der Knijff!!! for: ia_plugin, and JJJake for posting ia_plugin to: https://github.com/jjjake/iawayback'
 #ERROR Note: These above do not work
@@ -80,9 +80,9 @@ __thanks__ = 'Thanks you to Johan van der Knijff!!! for: ia_plugin, and JJJake f
 
 
 #### The following script will recapture a url if the most recent wayback capture is older than the specified days
-#### Usage: push_wayback.py <url> <days>
+#### Usage: wayback_refresh.py <url> <days>
 
-def push_to_wayback(url):
+def wayback_refresh(url):
     # Attempts to capture the website via the Wayback Machine
     # Alternative unexplored method available
     #    curl -X POST -H "Content-Type: application/json" -d '{"url": "URL"}' https://pragma.archivelab.org
@@ -92,7 +92,7 @@ def push_to_wayback(url):
         print("Page is wp-json formatting instructions, which is treated by the wayback/api differently: http://archive.org/help/wayback_api.php")
         sys.exit()
     else:
-        # Push to wayback URL preface
+        # Push URL to refresh wayback
         urlSAVE = "https://web.archive.org/save/"
         req = requests.get(urlSAVE + url)
 
@@ -192,7 +192,7 @@ def executewill(arguments):
     timestamp = returns[0]
 
     if len(timestamp) == 0:   # URL not captured in wayback
-        push_to_wayback(url)   # Capture URL
+        wayback_refresh(url)   # Capture URL
         returns = fetch_wayback_captured_date(url)   # Fetch URLs most recent capture date
         timestamp = returns[0]
     else:
@@ -209,7 +209,7 @@ def executewill(arguments):
     if recent_enough is False:
 
         #print("older timestamp: ", timestamp)
-        push_to_wayback(url)
+        wayback_refresh(url)
         urlWayback = fetch_wayback_captured_date(url)[1]
         #print("new capture: ", urlWayback)
 
@@ -241,6 +241,6 @@ $find ./websites -type f | grep .html | sort | uniq > file_list.txt
 $cat file_list.txt | while read -r line; do lwp-request -m GET -o links $line >> links.txt; done
 $cat links.txt | sort | uniq >> links_cleaner.txt
 $cat links_cleaner.txt | grep -oh "\w*www.*" >> urls.txt
-$cat "urls.txt" | while read -r line;  do python3 push_wayback.py $line; done
+$cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done
 
 """
