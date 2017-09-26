@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 """
 
+# wayback_refresh.py  -  A python tool to check if a URL in the Wayback Machine is fresh :seedling: 🌱 if the most recent capture is stale the Wayback will refresh with a new capture of the URL.
+
 # push_wayback  -  
-A python tool to check if a URL in the Wayback Machine is :seedling:fresh🥗, and recapture the URL if it is stale.
+A python tool to check if a URL in the Wayback Machine is fresh :seedling: 🌱, and recapture the URL if it is stale.
 
 Use the Internet Archive's ia_plugin to check for recent captures (with a user specified number of days) before creating a new capture request.
 
@@ -14,8 +16,12 @@ Options:
   -h --help                 Show this help message and exit.
   -d --days=<factor>        Manually set days [default: 365].
   -v --version              Show version.
+  -s --suppress             Suppress all responses.
+  -u --url_response         Allow fresh URL response only
   -a --author               Show author.     #ERROR Note: This does not work
   -thx --thanks             Show gratitude.  #ERROR Note: This does not work
+  -f   --fresh              print(chr(127793)) :seedling: 🌱
+
 
 
 
@@ -98,6 +104,7 @@ def push_to_wayback(url):
             req.close()
             print("Page request is 400, bad request")
             sys.exit()
+        print("Capture stale Wayback refresh",chr(127793))
         pass
         #if req.status_code == 200:
         #    print("Page request is 200, good request")
