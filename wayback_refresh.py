@@ -16,11 +16,11 @@ Options:
   -h --help                 Show this help message and exit.
   -d --days=<factor>        Manually set days [default: 365].
   -v --version              Show version.
-  -s --suppress             Suppress all responses.
-  -u --url_response         Allow fresh URL response only
+  -s --suppress             Suppress all responses. #ERROR Note: This does not work
+  -u --url_response         Allow fresh URL response only #ERROR Note: This does not work
   -a --author               Show author.     #ERROR Note: This does not work
   -thx --thanks             Show gratitude.  #ERROR Note: This does not work
-  -f   --fresh              print(chr(127793)) :seedling: 🌱
+  -f   --fresh              print(chr(127793)) :seedling: 🌱 #ERROR Note: This does not work
 
 
 
@@ -104,7 +104,6 @@ def wayback_refresh(url):
             req.close()
             print("Page request is 400, bad request")
             sys.exit()
-        print("Capture stale Wayback refresh",chr(127793))
         pass
         #if req.status_code == 200:
         #    print("Page request is 200, good request")
@@ -171,7 +170,7 @@ def is_capture_recent_enough(days, timestamp):
     days = datetime.timedelta(days)
 
     if days < timedelta:
-        print("Wayback capture is older than", str(days)[:6], "old. Generating a more recent wayback capture")
+        print("Wayback capture is stale (more than", str(days)[:6], "old). Requesting Wayback refresh", chr(127793))
         recent_enough = False
     else:
         # return(available, urlWayback, status, timestamp)
@@ -195,6 +194,9 @@ def executewill(arguments):
         wayback_refresh(url)   # Capture URL
         returns = fetch_wayback_captured_date(url)   # Fetch URLs most recent capture date
         timestamp = returns[0]
+        if len(timestamp) == 0:
+            print("URL appears valid, but Wayback is unable to capture")
+            sys.exit()
     else:
         pass
 
