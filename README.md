@@ -13,10 +13,13 @@ Usage: `wayback_refresh.py [options] [URL]`
 
 
 * -d --days                 Manually set definition of fresh :seedling: (in days) [default: 365].
+* -h --help                 Show this help message and exit.
+* -v --version              Show version.
 
 
 
-Run from bash with any of the following commands
+
+
 --------
 
 ### Run on a single URL:
@@ -25,8 +28,10 @@ Run from bash with any of the following commands
 ### Run on a single URL, do not recapture if fresher than: 7 days 
  *  `python3 -d 7 wayback_refresh.py "URL"`
 
-### For a list of URLs:
+### Run on a list of URLs:
  *  `cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done`
+
+
 
 
 
