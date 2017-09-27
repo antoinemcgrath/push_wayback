@@ -5,7 +5,9 @@
 
 Specify a URL & how fresh (# of days) you want the Wayback capture to be. 
 
-This script will use the Internet Archive's ia_plugin to update the capture if it is stale. 
+This script uses the Internet Archive's [ia_plugin](https://github.com/jjjake/ia_plugin) to update the capture if it is stale. 
+Thank you Internet Archive & ia_plugin creators/host: Johan van der Knijff & Jake
+
 
 
 ______
