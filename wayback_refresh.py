@@ -4,7 +4,10 @@
 -  A python tool to refresh stale URLs in the Wayback Machine
 
 Specify a URL & how fresh (# of days) you want the Wayback capture to be. 
-This script will use the Internet Archive's ia_plugin to update the capture if it is stale. 
+
+This script uses the Internet Archive's "save a URL" to refresh Wayback Machine website captures. 
+If you are not familiar with the non-profit Internet Archive take a look at the petabytes of free 
+information that they make available at Archive.org
 
 
 Usage:
@@ -14,10 +17,6 @@ Options:
   -d --days=<factor>        Set days still fresh [default: 365].
   -h --help                 Show this help message and exit.
   -v --version              Show version.  
-  -s --suppress             Suppress all responses. #ERROR Note: This does not work
-  -l --less_text            Allow fresh URL responses only. #ERROR Note: This does not work
-  -a --author               Show author.     #ERROR Note: This does not work
-  -thx --thanks             Show gratitude.  #ERROR Note: This does not work
 
 
 ### Run on a single URL:
@@ -60,15 +59,16 @@ from docopt import docopt
 
 __version__ = '0.0.1'
 
-#ERROR Note: These bellow do not work
-__title__ = 'wayback_refresh_plugin'
-__url__ = 'https://github.com/'
-__author__ = 'Antoine McGrath'
-__all__ = ['wayback_refresh']
-__email__ = 'Test@test.com'
-__thanks__ = 'Thanks you to Johan van der Knijff for: ia_plugin, and JJJake for posting ia_plugin to: https://github.com/jjjake/iawayback'
-#ERROR Note: These above do not work
 
+#Not currently utilized:__title__ = 'ia_wayback_refresh_plugin' 
+#Not currently utilized:__url__ = 'https://github.com/antoinemcgrath/wayback_refresh'
+#Not currently utilized:__author__ = 'Antoine McGrath'
+#Not currently utilized:__thanks__ = 'Thanks you Internet www.Archive Archive.org 
+#
+#Not currently utilized:#  -s --suppress             Suppress all responses.
+#Not currently utilized:#  -l --less_text            Allow fresh URL responses only. 
+#Not currently utilized:#  -a --author               Show author.     
+#Not currently utilized:#  -thx --thanks             Show gratitude.  
 
 
 #### The following script will recapture a url if it is stale (the wayback capture is older than the user specified days)
@@ -263,5 +263,5 @@ $cat links.txt | sort | uniq >> links_cleaner.txt
 $cat links_cleaner.txt | grep -oh "\w*www.*" >> urls.txt
 $cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done
 
-Thank you Internet Archive & Johan van der Knijff & Jake & https://github.com/jjjake/ia_plugin
+Thank you Internet Archive www.Archive.org
 """
