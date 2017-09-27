@@ -5,8 +5,7 @@
 
 Specify a URL & how fresh (# of days) you want the Wayback capture to be. 
 
-This script uses the Internet Archive's [ia_plugin](https://github.com/jjjake/ia_plugin) to update the capture if it is stale. 
-Thank you Internet Archive & ia_plugin creators/host: Johan van der Knijff & Jake
+This script uses the Internet Archive's "[save a URL feature](https://web.archive.org/)" to refresh Wayback Machine website captures. If you are not familiar with the non-profit Internet Archive take a look at the petabytes of free information that they make available Archive.org
 
 
 
