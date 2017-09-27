@@ -66,7 +66,7 @@ __url__ = 'https://github.com/'
 __author__ = 'Antoine McGrath'
 __all__ = ['wayback_refresh']
 __email__ = 'Test@test.com'
-__thanks__ = 'Thanks you to Johan van der Knijff!!! for: ia_plugin, and JJJake for posting ia_plugin to: https://github.com/jjjake/iawayback'
+__thanks__ = 'Thanks you to Johan van der Knijff for: ia_plugin, and JJJake for posting ia_plugin to: https://github.com/jjjake/iawayback'
 #ERROR Note: These above do not work
 
 
@@ -263,4 +263,5 @@ $cat links.txt | sort | uniq >> links_cleaner.txt
 $cat links_cleaner.txt | grep -oh "\w*www.*" >> urls.txt
 $cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done
 
+Thank you Internet Archive & Johan van der Knijff & Jake & https://github.com/jjjake/ia_plugin
 """
