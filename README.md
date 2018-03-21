@@ -49,9 +49,10 @@ Functional notes:
     3. If days is set to 0 via argument "-d 0" the URL will be submitted to the Wayback.
 
 
-Comments, critiques? Contact me -> [![alt text][6.3]][3]  [![alt text][1.2]][1][@AGreenDCBike](https://www.twitter.com/AGreenDCBike)  
+Like the [Internet Archive](https://archive.org/donate/) as much as I do? Thank them for hosting the Wayback & much more [![alt text][1.2]][2]!   
 
-Like the [Internet Archive](https://archive.org/donate/) as much as I do? Thank them for hosting the Wayback & much more! -> [![alt text][1.2]][2]   
+
+Comments, critiques? Contact me [![alt text][6.3]][3]  [![alt text][1.2]][1]
 
 <!-- Please don't remove this: Grab your social icons from https://github.com/carlsednaoui/gitsocial -->
 [1.2]: https://i.imgur.com/wWzX9uB.png (twitter icon without padding)
