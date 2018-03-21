@@ -3,10 +3,10 @@
 
 -  A python tool to refresh stale URLs in the Wayback Machine
 
-Specify a URL & how fresh (# of days) you want the Wayback capture to be. 
+Specify a URL & how fresh (# of days) you want the Wayback capture to be.
 
-This script uses the Internet Archive's "save a URL" to refresh Wayback Machine website captures. 
-If you are not familiar with the non-profit Internet Archive take a look at the petabytes of free 
+This script uses the Internet Archive's "save a URL" to refresh Wayback Machine website captures.
+If you are not familiar with the non-profit Internet Archive take a look at the petabytes of free
 information that they make available at Archive.org
 
 
@@ -16,13 +16,13 @@ wayback_refresh.py [options] [URL]
 Options:
   -d --days=<factor>        Set days still fresh [default: 365].
   -h --help                 Show this help message and exit.
-  -v --version              Show version.  
+  -v --version              Show version.
 
 
 ### Run on a single URL:
  *  `python3 wayback_refresh.py "URL"`
 
-### Run on a single URL, do not recapture if fresher than: 7 days 
+### Run on a single URL, do not recapture if fresher than: 7 days
  *  `python3 -d 7 wayback_refresh.py "URL"`
 
 ### Run on a list of URLs:
@@ -43,7 +43,7 @@ Functional notes:
     3. If days is set to 0 via argument "-d 0" the URL will be submitted to the Wayback.
 
 
-Comments, critiques? Contact me -> @AGreenDCBike (https://www.twitter.com/AGreenDCBike)  
+Comments, critiques? Contact me -> @AGreenDCBike (https://www.twitter.com/AGreenDCBike)
 
 Like the Internet Archive as much as I do? Thank them for hosting the Wayback & much more! -> https://archive.org/donate/
 
@@ -59,16 +59,6 @@ from docopt import docopt
 
 __version__ = '0.0.1'
 
-
-#Not currently utilized:__title__ = 'ia_wayback_refresh_plugin' 
-#Not currently utilized:__url__ = 'https://github.com/antoinemcgrath/wayback_refresh'
-#Not currently utilized:__author__ = 'Antoine McGrath'
-#Not currently utilized:__thanks__ = 'Thanks you Internet www.Archive Archive.org 
-#
-#Not currently utilized:#  -s --suppress             Suppress all responses.
-#Not currently utilized:#  -l --less_text            Allow fresh URL responses only. 
-#Not currently utilized:#  -a --author               Show author.     
-#Not currently utilized:#  -thx --thanks             Show gratitude.  
 
 
 #### The following script will recapture a url if it is stale (the wayback capture is older than the user specified days)
@@ -251,8 +241,8 @@ if __name__ == '__main__':
 
 """
 One way to create a list of URLs is to scrape links from urls that are already in the Wayback Machine.
-To capture URLS & relative URLs from a specified domain: 
- -Utilize https://github.com/hartator/wayback-machine-downloader 
+To capture URLS & relative URLs from a specified domain:
+ -Utilize https://github.com/hartator/wayback-machine-downloader
  -And execute the following in bash:
 
 $wayback_machine_downloader "URL"
@@ -263,5 +253,5 @@ $cat links.txt | sort | uniq >> links_cleaner.txt
 $cat links_cleaner.txt | grep -oh "\w*www.*" >> urls.txt
 $cat "urls.txt" | while read -r line;  do python3 wayback_refresh.py $line; done
 
-Thank you Internet Archive www.Archive.org
+A big thank you to the Internet Archive www.Archive.org
 """
