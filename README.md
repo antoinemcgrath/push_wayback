@@ -49,7 +49,7 @@ Functional notes:
     3. If days is set to 0 via argument "-d 0" the URL will be submitted to the Wayback.
 
 
-Comments, critiques? Contact me -> [![alt text][1.2]][1][@AGreenDCBike](https://www.twitter.com/AGreenDCBike)  
+Comments, critiques? Contact me -> [![alt text][6.2]][6]  [![alt text][1.2]][1][@AGreenDCBike](https://www.twitter.com/AGreenDCBike)  
 
 Like the [Internet Archive](https://archive.org/donate/) as much as I do? Thank them for hosting the Wayback & much more! -> [![alt text][1.2]][2]   
 
@@ -57,3 +57,6 @@ Like the [Internet Archive](https://archive.org/donate/) as much as I do? Thank 
 [1.2]: https://i.imgur.com/wWzX9uB.png (twitter icon without padding)
 [1]: https://www.twitter.com/AGreenDCBike
 [2]: https://www.twitter.com/internetarchive
+[6.2]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
+[3]: https://github.com/antoinemcgrath
+
